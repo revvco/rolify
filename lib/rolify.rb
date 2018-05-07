@@ -33,7 +33,7 @@ module Rolify
       join_table_name =
         (rolify_options.delete(:join_table) || self.role_join_table_name).to_sym
 
-      has_many join_table_name, :dependent => :destroy
+      has_many join_table_name, :dependent => :destroy, :counter_cache => :roles_count
       has_many :roles, rolify_options.merge!(:through => join_table_name)  # role_cname: 'EntityRole'
     else
       has_and_belongs_to_many :roles, rolify_options
